@@ -10,16 +10,26 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        userDefaultsChanged(nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDefaultsChanged:", name: NSUserDefaultsDidChangeNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: NSUserDefaultsDidChangeNotification, object: nil)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func openApplicationSettings(sender: UIBarButtonItem) {
+        guard let settingURL = NSURL(string: UIApplicationOpenSettingsURLString) else {
+            return
+        }
+        UIApplication.sharedApplication().openURL(settingURL)
     }
-
-
+    
+    func userDefaultsChanged(sender: NSNotification?) {
+        print(NSUserDefaults.standardUserDefaults().dictionaryRepresentation())
+    }
 }
 

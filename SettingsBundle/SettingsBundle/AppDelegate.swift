@@ -16,6 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        if let settingsBundleURL = NSBundle.mainBundle().URLForResource("Settings", withExtension: "bundle"), let appDefaults = loadDefaultsFromSettingPage("Root.plist", inSettingsBundleAtURL: settingsBundleURL) {
+            NSUserDefaults.standardUserDefaults().registerDefaults(appDefaults)
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+        
         return true
     }
 
@@ -41,6 +47,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    private func loadDefaultsFromSettingPage(plistName: String, inSettingsBundleAtURL settingsBundleURL: NSURL) -> [String : AnyObject]? {
+        let url = settingsBundleURL.URLByAppendingPathComponent(plistName)
+        guard let settings = NSDictionary(contentsOfURL: url) else {
+            return nil
+        }
+        guard let specifiers = settings["PreferenceSpecifiers"] as? [[String : AnyObject]] else {
+            return nil
+        }
+        
+        let keyValuePairs = NSMutableDictionary()
+        
+        for item in specifiers {
+            let itemType = item["Type"] as? String
+            let itemKey = item["Key"] as? String
+            let itemDefaultValue = item["DefaultValue"]
+            if let type = itemType where type == "PSChildPaneSpecifier" {
+                if let itemFile = item["File"] as? String, let childPageKeyValuePairs = loadDefaultsFromSettingPage(itemFile, inSettingsBundleAtURL: settingsBundleURL) {
+                    keyValuePairs.addEntriesFromDictionary(childPageKeyValuePairs)
+                }
+            } else if itemKey != nil && itemDefaultValue != nil {
+                keyValuePairs[itemKey!] = itemDefaultValue
+            }
+        }
+        
+        return keyValuePairs as [NSObject : AnyObject] as? [String : AnyObject]
+    }
 }
 

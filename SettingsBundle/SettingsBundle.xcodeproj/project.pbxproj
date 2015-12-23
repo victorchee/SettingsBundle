@@ -12,6 +12,7 @@
 		BB3408771C28E1460030D303 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB3408751C28E1460030D303 /* Main.storyboard */; };
 		BB3408791C28E1460030D303 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB3408781C28E1460030D303 /* Assets.xcassets */; };
 		BB34087C1C28E1460030D303 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB34087A1C28E1460030D303 /* LaunchScreen.storyboard */; };
+		BB3408841C28E1970030D303 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB3408831C28E1970030D303 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		BB3408781C28E1460030D303 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB34087B1C28E1460030D303 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BB34087D1C28E1460030D303 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BB3408831C28E1970030D303 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				BB3408781C28E1460030D303 /* Assets.xcassets */,
 				BB34087A1C28E1460030D303 /* LaunchScreen.storyboard */,
 				BB34087D1C28E1460030D303 /* Info.plist */,
+				BB3408831C28E1970030D303 /* Settings.bundle */,
 			);
 			path = SettingsBundle;
 			sourceTree = "<group>";
@@ -122,6 +125,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB3408841C28E1970030D303 /* Settings.bundle in Resources */,
 				BB34087C1C28E1460030D303 /* LaunchScreen.storyboard in Resources */,
 				BB3408791C28E1460030D303 /* Assets.xcassets in Resources */,
 				BB3408771C28E1460030D303 /* Main.storyboard in Resources */,
